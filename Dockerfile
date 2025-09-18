@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 #create jar file
-RUN mvn clean install -DskipTest=true
+RUN mvn clean install -DskipTests=true
 
 ## Stage 2 - Execute JAR files
 #alpine type images are small in size
