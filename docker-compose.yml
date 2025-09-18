@@ -26,12 +26,24 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/expenses_tracker?allowPublicKeyRetrieval=true&useSSL=false"
       SPRING_DATASOURCE_PASSWORD: Test@123
-    ports:
-      - "8080:8080"
     networks:
       - expense-nw
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - expense-nw
+    depends_on:
+      - mainapp
     restart: always
 
 networks:
