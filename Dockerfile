@@ -16,7 +16,7 @@ FROM openjdk:17-alpine
 WORKDIR /app
 
 # Copy build from stage 1 (builder)
-COPY --from=builder /app/target/*.jar /app/expenseapp.jar
+COPY --from=builder /app/target/*.jar /app/target/expenseapp.jar
 
 
 EXPOSE 8080
